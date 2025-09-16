@@ -52,5 +52,5 @@ def evaluate_model(model, X_test, y_test):
 def export_model(model):
     current_time = datetime.now()
     formatted_time = current_time.strftime("%Y%m%d%H%M%S")
-    filename = f"modelTraining\models\liner_regression_model_{formatted_time}.pkl"
+    filename = f".\models\liner_regression_model_{formatted_time}.pkl"
     joblib.dump(model, filename)
