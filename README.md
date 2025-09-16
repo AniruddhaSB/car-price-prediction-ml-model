@@ -13,10 +13,12 @@ Here we use it for price prediction
 5. It will always use the latest model from /models folder during /predict_local.
 6. /predict_local is a HTTP Get Endpoint. It exppect user inputs as query string for  prediction. 
 Sample input -
+```code
 /predict_local?Engine%20size=1.2&Year%20of%20manufacture=2012&Mileage=73470&Model=Polo&Fuel%20type=Petrol
-
+```
 # References
 Details regarding Exploratory Data Analysis can be found here: https://www.kaggle.com/code/shmagibokuchava7/pricepredict-pro
 
 # Dataset
 https://www.kaggle.com/datasets/msnbehdani/mock-dataset-of-second-hand-car-sales
+
