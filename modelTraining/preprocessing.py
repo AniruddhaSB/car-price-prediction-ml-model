@@ -12,14 +12,17 @@ def preprocess(df:pd.DataFrame):
 
     df["Model_encoded"] = le_model.fit_transform(df["Model"])
     df["Fuel_type_encoded"] = le_fuel.fit_transform(df["Fuel type"])
+    
+    features = ['Model_encoded', 'Engine size', 'Fuel_type_encoded', 'Year of manufacture', 'Mileage']
+    new_df = df[features]
 
-    return df
+    return new_df
 
-def get_train_test_data(df, features, target_column, test_size, random_state):
+def split_data(df, target_column, test_size, random_state):
     
     # Split features (X) and target (y)
-    X = df[features]
-    y = df[target_column]
+    y = df.pop(target_column)
+    X = df
     
     # Perform the train-test split
     X_train, X_test, y_train, y_test = train_test_split(

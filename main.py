@@ -1,8 +1,11 @@
 import os
-from flask import Flask
+from flask import Flask, request
 from datetime import datetime
 
+import pandas as pd
+
 from modelTraining.buildModel import build_model_using_local_data
+from predictor.predict import predict_car_price_using_pretrained_model
 
 app = Flask(__name__)
 
@@ -23,6 +26,21 @@ def hello_world():
 @app.route('/build_model_locally')
 def build_model_locally():
     msg = build_model_using_local_data()
+    return msg
+
+@app.route('/predict_local')
+def predict_car_price1():
+    query_string_params = request.args.to_dict(flat=False)
+    print(query_string_params)
+    df = pd.DataFrame(query_string_params)
+    msg = predict_car_price_using_pretrained_model(doUseLocalModel = True, userInput_df = df)
+    return msg
+
+@app.route('/predict_gcs')
+def predict_car_price2():
+    query_string_params = request.args.to_dict(flat=False)
+    df = pd.DataFrame(query_string_params)
+    msg = predict_car_price_using_pretrained_model(doUseLocalModel = False, userInput_df = df)
     return msg
 
 # This block must be at the same level of indentation as the import statement and app = Flask(__name__)

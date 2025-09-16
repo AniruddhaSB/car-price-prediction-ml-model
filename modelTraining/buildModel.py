@@ -4,7 +4,7 @@ from sklearn.linear_model import LinearRegression
 import joblib
 import numpy as np
 from sklearn.metrics import mean_squared_error
-from .preprocessing import get_train_test_data, load_data_from_local_csv, preprocess
+from .preprocessing import split_data, load_data_from_local_csv, preprocess
 
 def build_model_using_local_data():
     try:
@@ -18,8 +18,7 @@ def build_model_using_local_data():
         print(df.shape)
 
         #Feature Engineering / training and test data splitting.
-        features = ['Model_encoded', 'Engine size', 'Fuel_type_encoded', 'Year of manufacture', 'Mileage']
-        X_train, X_test, y_train, y_test = get_train_test_data(df = df, features = features, target_column= "Price", test_size = 0.2, random_state = 7)
+        X_train, X_test, y_train, y_test = split_data(df = df, target_column= "Price", test_size = 0.2, random_state = 7)
         print("Training and testing data split done.")
 
         model = build_model(X_train, y_train)
