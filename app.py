@@ -1,3 +1,4 @@
+import glob
 import os
 from flask import Flask, request
 from datetime import datetime
@@ -41,6 +42,24 @@ def predict_car_price2():
     query_string_params = request.args.to_dict(flat=False)
     df = pd.DataFrame(query_string_params)
     msg = predict_car_price_using_pretrained_model(doUseLocalModel = False, userInput_df = df)
+    return msg
+
+@app.route('/ModelFound')
+def check_if_model_exists():
+
+    dir = request.args.get('dir')
+    if not os.path.isdir(dir):
+        msg = f"Error: Directory does not exist: {dir}"
+    else:
+        msg = f"Error: Directory exist: {dir}"
+
+        search_path = os.path.join(dir, "*_model_*.pkl")
+        list_of_files = glob.glob(search_path)
+        msg = f"Directory Found. Files matching pattern: {len(list_of_files)}"
+        sorted_files = sorted(list_of_files)
+        first_file = sorted_files[0]
+        msg = f"Directory Found. Files matching pattern: {len(list_of_files)}. File selected to load {first_file}"
+
     return msg
 
 # This block must be at the same level of indentation as the import statement and app = Flask(__name__)

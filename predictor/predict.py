@@ -36,8 +36,9 @@ def load_model_from_local():
     search_path = os.path.join(".\models", "*_model_*.pkl")
     list_of_files = glob.glob(search_path)
     
-    latest_file = max(list_of_files, key=os.path.getmtime)
-    print(f"Loading model from latest updated file: {latest_file}")
-
-    model = joblib.load(latest_file)
+    #Take the first one.
+    sorted_files = sorted(list_of_files)
+    first_file = sorted_files[0] 
+    
+    model = joblib.load(first_file)
     return model
