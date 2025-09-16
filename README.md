@@ -5,5 +5,8 @@ This dataset contains detailed information on car sales, covering multiple manuf
 
 Here we use it for price prediction
 
+# References
+Details regarding Exploratory Data Analysis can be found here: https://www.kaggle.com/code/shmagibokuchava7/pricepredict-pro
+
 # Dataset
 https://www.kaggle.com/datasets/msnbehdani/mock-dataset-of-second-hand-car-sales
