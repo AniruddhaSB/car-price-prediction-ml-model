@@ -22,8 +22,8 @@ def hello_world():
 
 @app.route('/build_model_locally')
 def build_model_locally():
-    df = build_model_using_local_data()
-    return "OK"
+    msg = build_model_using_local_data()
+    return msg
 
 # This block must be at the same level of indentation as the import statement and app = Flask(__name__)
 if __name__ == '__main__':

@@ -1,7 +1,56 @@
-from .preprocessing import load_data_from_csv
+from datetime import datetime
+from sklearn.linear_model import LinearRegression
+
+import joblib
+import numpy as np
+from sklearn.metrics import mean_squared_error
+from .preprocessing import get_train_test_data, load_data_from_local_csv, preprocess
 
 def build_model_using_local_data():
+    try:
+        #Load data
+        df = load_data_from_local_csv("modelTraining\\data\\car_sales_data.csv")
+        print("Data frame loaded")
+        print(df.shape)
 
-    #Load data
-    df = load_data_from_csv("modelTraining\\data\\car_sales_data.csv")
-    print(df.head(5))
+        #Preprocess / Encode categorical variables Model and Fuel Type
+        df = preprocess(df)
+        print(df.shape)
+
+        #Feature Engineering / training and test data splitting.
+        features = ['Model_encoded', 'Engine size', 'Fuel_type_encoded', 'Year of manufacture', 'Mileage']
+        X_train, X_test, y_train, y_test = get_train_test_data(df = df, features = features, target_column= "Price", test_size = 0.2, random_state = 7)
+        print("Training and testing data split done.")
+
+        model = build_model(X_train, y_train)
+        print("model building done.")
+
+        rmse = evaluate_model(model, X_test, y_test)
+        print(f"Root mean square error for the model is: [{rmse}].")
+
+        export_model(model)
+        print(f"Model successfully exported.")
+
+        return "successfully completed."
+    except Exception as e:
+        return f"An unexpected error occurred: {e}"
+
+def build_model(X_train, y_train):
+    # Linear Regression
+    model = LinearRegression()
+    model.fit(X_train, y_train)
+
+    return model
+
+def evaluate_model(model, X_test, y_test):
+    y_pred = model.predict(X_test)
+    mse = mean_squared_error(y_test, y_pred)
+    rmse = np.sqrt(mse)
+
+    return rmse
+
+def export_model(model):
+    current_time = datetime.now()
+    formatted_time = current_time.strftime("%Y%m%d%H%M%S")
+    filename = f"modelTraining\models\liner_regression_model_{formatted_time}.pkl"
+    joblib.dump(model, filename)
