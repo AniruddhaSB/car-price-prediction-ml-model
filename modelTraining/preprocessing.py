@@ -13,7 +13,7 @@ def preprocess(df:pd.DataFrame):
     df["Model_encoded"] = le_model.fit_transform(df["Model"])
     df["Fuel_type_encoded"] = le_fuel.fit_transform(df["Fuel type"])
     
-    features = ['Model_encoded', 'Engine size', 'Fuel_type_encoded', 'Year of manufacture', 'Mileage']
+    features = ['Model_encoded', 'Engine size', 'Fuel_type_encoded', 'Year of manufacture', 'Mileage', 'Price']
     new_df = df[features]
 
     return new_df

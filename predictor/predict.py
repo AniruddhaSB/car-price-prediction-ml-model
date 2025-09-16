@@ -10,14 +10,21 @@ def predict_car_price_using_pretrained_model(doUseLocalModel:bool, userInput_df)
             model = load_model_from_local()
             print("Model Loaded Successfully")
 
+            #Added dummy output column before preprocessing.
+            userInput_df['Price'] = 0
             print(f"User input dataframe: {userInput_df}")
 
             preprocessed_df = preprocess(userInput_df)
+
+            #Removed dummy output column beforeprediction.
+            preprocessed_df.drop('Price', axis=1, inplace=True)
+
             print(preprocessed_df)
             print(f"Preprocessed dataframe: {userInput_df}")
 
             prediction = model.predict(preprocessed_df)
             print(f"Prediction: {prediction}")
+            return f"Predicted proise: {prediction[0]:.2f}"
         else:
             return "predicted car price is $100"
     except Exception as e:
