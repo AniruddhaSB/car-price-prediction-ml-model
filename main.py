@@ -2,6 +2,8 @@ import os
 from flask import Flask
 from datetime import datetime
 
+from modelTraining.buildModel import build_model_using_local_data
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -17,6 +19,11 @@ def hello_world():
     response = f'Hello World! The current date and time is: {formatted_time}'
 
     return response
+
+@app.route('/build_model_locally')
+def build_model_locally():
+    df = build_model_using_local_data()
+    return "OK"
 
 # This block must be at the same level of indentation as the import statement and app = Flask(__name__)
 if __name__ == '__main__':
