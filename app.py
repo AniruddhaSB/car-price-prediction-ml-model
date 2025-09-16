@@ -57,7 +57,7 @@ def check_if_model_exists():
         list_of_files = glob.glob(search_path)
         msg = f"Directory Found. Files matching pattern: {len(list_of_files)}"
         sorted_files = sorted(list_of_files)
-        first_file = sorted_files[0]
+        first_file = sorted_files[-1]
         msg = f"Directory Found. Files matching pattern: {len(list_of_files)}. File selected to load {first_file}"
 
     return msg

@@ -31,7 +31,29 @@ def predict_car_price_using_pretrained_model(doUseLocalModel:bool, userInput_df)
         return f"An unexpected error occurred: {e}"
 
 
+
 def load_model_from_local():
+    # Use forward slashes for cross-platform compatibility
+    search_path = os.path.join("models", "*_model_*.pkl")
+    print(f"Searching for models at: {search_path}")
+
+    # Use a sorted list to get the first one alphabetically.
+    list_of_files = sorted(glob.glob(search_path))
+
+    # Add a check to see if any files were found.
+    if not list_of_files:
+        raise FileNotFoundError(f"No model files found matching the pattern '{search_path}'")
+
+    lastest_file = list_of_files[-1]
+    print(f"Found and loading the following model file: {lastest_file}")
+
+    try:
+        model = joblib.load(lastest_file)
+        return model
+    except Exception as e:
+        raise RuntimeError(f"Failed to load the model file '{lastest_file}': {e}")
+    
+def load_model_from_local_old():
 
     search_path = os.path.join(".\models", "*_model_*.pkl")
     list_of_files = glob.glob(search_path)
