@@ -5,6 +5,11 @@ This dataset contains detailed information on car sales, covering multiple manuf
 
 Here we use it for price prediction
 
+# Workflow
+1. Raw data file is added in data folder.
+2. Flask server endpoint /build_model_locally is used to build a new model.
+3. Newly built model is preserved in models folder (with file name having the current timestamp)
+
 # References
 Details regarding Exploratory Data Analysis can be found here: https://www.kaggle.com/code/shmagibokuchava7/pricepredict-pro
 
