@@ -15,9 +15,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 #Copy the rest of the application's source code to the container.
 COPY . .
 
-#Expose port 5000.
+#Expose port 8080.
 #This tells Docker that the container listens on this port.
-EXPOSE 5000
+EXPOSE 8080
 
 #Define the command to run the application.
 #This is the command that gets executed when the container starts.
