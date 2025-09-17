@@ -3,12 +3,11 @@ import os
 import joblib
 
 from modelTraining.preprocessing import preprocess
+from google.cloud import storage
 
-def predict_car_price_using_pretrained_model(doUseLocalModel:bool, userInput_df):
+def predict_car_price_using_pretrained_model(model, userInput_df):
     try:
-        if doUseLocalModel:
-            model = load_model_from_local()
-            print("Model Loaded Successfully")
+        if model is not None:
 
             #Added dummy output column before preprocessing.
             userInput_df['Price'] = 0
@@ -26,7 +25,7 @@ def predict_car_price_using_pretrained_model(doUseLocalModel:bool, userInput_df)
             print(f"Prediction: {prediction}")
             return f"Predicted price of a car: {prediction[0]:.2f}"
         else:
-            return "predicted car price is $100"
+            return "Model not loaded, returning default - predicted car price as $0"
     except Exception as e:
         return f"An unexpected error occurred: {e}"
 
@@ -53,14 +52,18 @@ def load_model_from_local():
     except Exception as e:
         raise RuntimeError(f"Failed to load the model file '{lastest_file}': {e}")
     
-def load_model_from_local_old():
+    
+# Replace with your bucket name and model file name
+BUCKET_NAME = ' prebuilt-models'
+MODEL_FILE = 'prebuilt-models/car-price-predictor/python-models/liner_regression_model_20250916160618.pkl'
 
-    search_path = os.path.join(".\models", "*_model_*.pkl")
-    list_of_files = glob.glob(search_path)
-    
-    #Take the first one.
-    sorted_files = sorted(list_of_files)
-    first_file = sorted_files[0] 
-    
-    model = joblib.load(first_file)
+# Initialize GCS client
+storage_client = storage.Client()
+
+# Function to download and load the model
+def load_model_from_cloud_storage():
+    bucket = storage_client.bucket(BUCKET_NAME)
+    blob = bucket.blob(MODEL_FILE)
+    model_bytes = blob.download_as_bytes()
+    model = joblib.loads(model_bytes)
     return model

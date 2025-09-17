@@ -6,9 +6,13 @@ from datetime import datetime
 import pandas as pd
 
 from modelTraining.buildModel import build_model_using_local_data
-from predictor.predict import predict_car_price_using_pretrained_model
+from predictor.predict import load_model_from_cloud_storage, load_model_from_local, predict_car_price_using_pretrained_model
 
 app = Flask(__name__)
+
+#load models only once.
+local_model = load_model_from_local()
+cloud_model = load_model_from_cloud_storage()
 
 @app.route('/')
 def hello_world():
@@ -34,14 +38,14 @@ def predict_car_price1():
     query_string_params = request.args.to_dict(flat=False)
     print(query_string_params)
     df = pd.DataFrame(query_string_params)
-    msg = predict_car_price_using_pretrained_model(doUseLocalModel = True, userInput_df = df)
+    msg = predict_car_price_using_pretrained_model(local_model, userInput_df = df)
     return msg
 
 @app.route('/predict_gcs')
 def predict_car_price2():
     query_string_params = request.args.to_dict(flat=False)
     df = pd.DataFrame(query_string_params)
-    msg = predict_car_price_using_pretrained_model(doUseLocalModel = False, userInput_df = df)
+    msg = predict_car_price_using_pretrained_model(cloud_model, userInput_df = df)
     return msg
 
 @app.route('/ModelFound')
