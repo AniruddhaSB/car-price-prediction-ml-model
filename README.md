@@ -90,11 +90,13 @@ Here we use it for price prediction
      
 
 # References
-Details regarding Exploratory Data Analysis can be found here: https://www.kaggle.com/code/shmagibokuchava7/pricepredict-pro
-Setting up Application Default Credentials: https://cloud.google.com/docs/authentication/provide-credentials-adc#how-to
+1. Details regarding Exploratory Data Analysis can be found here: https://www.kaggle.com/code/shmagibokuchava7/pricepredict-pro
+2. Setting up Application Default Credentials: https://cloud.google.com/docs/authentication/provide-credentials-adc#how-to
+3. Connecting VS Code to GCP: https://www.youtube.com/watch?v=KeZ2ncbVPyE
 
 # Dataset
 https://www.kaggle.com/datasets/msnbehdani/mock-dataset-of-second-hand-car-sales
+
 
 
 
