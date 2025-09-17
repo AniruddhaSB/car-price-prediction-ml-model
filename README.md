@@ -88,13 +88,20 @@ Here we use it for price prediction
 
 ## Endpint 2: Pretrained Model in GCS + Prediction APIs with Cloud Run
 
-### Running locally - 
+### Running App locally - 
 1. Need to install Google Cloud SDK.
 2. From Google Cloud SDK Shell run Cloud init
 3. Set default account to use and project.
 4. In VSCode add plugin Cloud Code - restart - then VS Code terminal will allow running gcloud commands
 5. Run gscloud init to set default account and project from VSCode terminal.
 6. Then run the app.py python file as usual. 
+
+### Running Container Locally
+1. Create a Service Account.
+2. Grand access to access cloud storgae.
+3. Download json key file.
+4. Mount the key file (volume) whuile runnin docker run -v <Disk file path>:<docker file path>
+5. set GOOGLE_APPLICATION_CREDENTIALS to file path.
 
 # References
 1. Details regarding Exploratory Data Analysis can be found here: https://www.kaggle.com/code/shmagibokuchava7/pricepredict-pro
@@ -103,6 +110,7 @@ Here we use it for price prediction
 
 # Dataset
 https://www.kaggle.com/datasets/msnbehdani/mock-dataset-of-second-hand-car-sales
+
 
 
 
