@@ -1,5 +1,7 @@
 import glob
+import io
 import os
+import pickle
 import joblib
 
 from modelTraining.preprocessing import preprocess
@@ -54,16 +56,22 @@ def load_model_from_local():
     
     
 # Replace with your bucket name and model file name
-BUCKET_NAME = ' prebuilt-models'
-MODEL_FILE = 'prebuilt-models/car-price-predictor/python-models/liner_regression_model_20250916160618.pkl'
+BUCKET_NAME = 'prebuilt-models'
+MODEL_FILE = 'car-price-predictor/python-models/liner_regression_model_20250916160618.pkl'
+#MODEL_FILE = 'liner_regression_model_20250916160618.pkl'
 
 # Initialize GCS client
 storage_client = storage.Client()
 
 # Function to download and load the model
 def load_model_from_cloud_storage():
-    bucket = storage_client.bucket(BUCKET_NAME)
-    blob = bucket.blob(MODEL_FILE)
-    model_bytes = blob.download_as_bytes()
-    model = joblib.loads(model_bytes)
-    return model
+    try:
+        bucket = storage_client.bucket(BUCKET_NAME)
+        blob = bucket.blob(MODEL_FILE)
+        model_bytes = blob.download_as_bytes()
+        model_file_like_object = io.BytesIO(model_bytes)
+        model = joblib.load(model_file_like_object)
+        print(f"Loaded model from GCS: {MODEL_FILE}")
+        return model
+    except Exception as e:
+        print(f"Failed to load the model file: {e}")
