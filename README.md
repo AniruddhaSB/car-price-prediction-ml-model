@@ -86,8 +86,15 @@ Here we use it for price prediction
      Engine%20size=2.2&Year%20of%20manufacture=2008&Mileage=69000&Model=RAV4&Fuel%20type=Hybrid
      ```
 
-## Endpint 2: Data in GCS + Model in GCS + Prediction APIs with Cloud Run
-     
+## Endpint 2: Pretrained Model in GCS + Prediction APIs with Cloud Run
+
+### Running locally - 
+1. Need to install Google Cloud SDK.
+2. From Google Cloud SDK Shell run Cloud init
+3. Set default account to use and project.
+4. In VSCode add plugin Cloud Code - restart - then VS Code terminal will allow running gcloud commands
+5. Run gscloud init to set default account and project from VSCode terminal.
+6. Then run the app.py python file as usual. 
 
 # References
 1. Details regarding Exploratory Data Analysis can be found here: https://www.kaggle.com/code/shmagibokuchava7/pricepredict-pro
@@ -96,6 +103,7 @@ Here we use it for price prediction
 
 # Dataset
 https://www.kaggle.com/datasets/msnbehdani/mock-dataset-of-second-hand-car-sales
+
 
 
 
