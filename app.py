@@ -20,7 +20,7 @@ def hello_world():
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
 
     # Create the final response string
-    response = f'Hello World! The current date and time is: {formatted_time}'
+    response = f'Namaste. Current date and time is: {formatted_time}'
 
     return response
 

@@ -1,4 +1,5 @@
 from datetime import datetime
+import os
 from sklearn.linear_model import LinearRegression
 
 import joblib
@@ -9,7 +10,8 @@ from .preprocessing import split_data, load_data_from_local_csv, preprocess
 def build_model_using_local_data():
     try:
         #Load data
-        df = load_data_from_local_csv("modelTraining\\data\\car_sales_data.csv")
+        file_path = os.path.join("modelTraining", "data", "car_sales_data.csv")
+        df = load_data_from_local_csv(file_path)
         print("Data frame loaded")
         print(df.shape)
 

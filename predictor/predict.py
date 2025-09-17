@@ -24,7 +24,7 @@ def predict_car_price_using_pretrained_model(doUseLocalModel:bool, userInput_df)
 
             prediction = model.predict(preprocessed_df)
             print(f"Prediction: {prediction}")
-            return f"Predicted proise: {prediction[0]:.2f}"
+            return f"Predicted price of a car: {prediction[0]:.2f}"
         else:
             return "predicted car price is $100"
     except Exception as e:
