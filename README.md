@@ -90,7 +90,7 @@ Here we use it for price prediction
 
 ### Running App locally - 
 1. Need to install Google Cloud SDK.
-2. From Google Cloud SDK Shell run Cloud init
+2. From Google Cloud SDK Shell run Cloud init and gcloud auth application-default login
 3. Set default account to use and project.
 4. In VSCode add plugin Cloud Code - restart - then VS Code terminal will allow running gcloud commands
 5. Run gscloud init to set default account and project from VSCode terminal.
@@ -110,6 +110,7 @@ Here we use it for price prediction
 
 # Dataset
 https://www.kaggle.com/datasets/msnbehdani/mock-dataset-of-second-hand-car-sales
+
 
 
 
