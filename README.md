@@ -105,7 +105,10 @@ Here we use it for price prediction
    ```code
     gcloud projects add-iam-policy-binding nimble-octagon-253816 --member="serviceAccount:download-gcs-file@nimble-octagon-253816.iam.gserviceaccount.com" --role="roles/storage.objectViewer"
    ```
-5. Download json key file.
+   -p => to map port, so all 8080 requests on machine will be trasfered to docker container.
+   -e => to set environment variable
+   -v => to map storage volume 
+5. Create / download json key file. - Go to gcp >> IAM >> Service Account >> Keys >> Add New - AS JSON. It will download to machine.
 6. Mount the key file (volume) whuile runnin docker run -v <Disk file path>:<docker file path>
 7. set GOOGLE_APPLICATION_CREDENTIALS to file path.
 
@@ -116,6 +119,7 @@ Here we use it for price prediction
 
 # Dataset
 https://www.kaggle.com/datasets/msnbehdani/mock-dataset-of-second-hand-car-sales
+
 
 
 
