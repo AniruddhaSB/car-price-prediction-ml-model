@@ -98,10 +98,16 @@ Here we use it for price prediction
 
 ### Running Container Locally
 1. Create a Service Account.
-2. Grand access to access cloud storgae.
-3. Download json key file.
-4. Mount the key file (volume) whuile runnin docker run -v <Disk file path>:<docker file path>
-5. set GOOGLE_APPLICATION_CREDENTIALS to file path.
+   ```code
+    gcloud iam service-accounts create download-gcs-file --display-name="Service Account to Download GCS Files"
+   ```
+3. Grand access to access cloud storgae.
+   ```code
+    gcloud projects add-iam-policy-binding nimble-octagon-253816 --member="serviceAccount:download-gcs-file@nimble-octagon-253816.iam.gserviceaccount.com" --role="roles/storage.objectViewer"
+   ```
+5. Download json key file.
+6. Mount the key file (volume) whuile runnin docker run -v <Disk file path>:<docker file path>
+7. set GOOGLE_APPLICATION_CREDENTIALS to file path.
 
 # References
 1. Details regarding Exploratory Data Analysis can be found here: https://www.kaggle.com/code/shmagibokuchava7/pricepredict-pro
@@ -110,6 +116,7 @@ Here we use it for price prediction
 
 # Dataset
 https://www.kaggle.com/datasets/msnbehdani/mock-dataset-of-second-hand-car-sales
+
 
 
 
