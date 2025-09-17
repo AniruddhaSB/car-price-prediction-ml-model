@@ -86,14 +86,46 @@ Here we use it for price prediction
      Engine%20size=2.2&Year%20of%20manufacture=2008&Mileage=69000&Model=RAV4&Fuel%20type=Hybrid
      ```
 
-## Endpint 2: Data in GCS + Model in GCS + Prediction APIs with Cloud Run
-     
+## Endpint 2: Pretrained Model in GCS + Prediction APIs with Cloud Run
+
+### Running App locally - 
+1. Need to install Google Cloud SDK.
+2. From Google Cloud SDK Shell run Cloud init and gcloud auth application-default login
+3. Set default account to use and project.
+4. In VSCode add plugin Cloud Code - restart - then VS Code terminal will allow running gcloud commands
+5. Run gscloud init to set default account and project from VSCode terminal.
+6. Then run the app.py python file as usual. 
+
+### Running Container Locally
+1. Create a Service Account.
+   ```code
+    gcloud iam service-accounts create download-gcs-file --display-name="Service Account to Download GCS Files"
+   ```
+3. Grand access to access cloud storgae.
+   ```code
+    gcloud projects add-iam-policy-binding nimble-octagon-253816 --member="serviceAccount:download-gcs-file@nimble-octagon-253816.iam.gserviceaccount.com" --role="roles/storage.objectViewer"
+   ```
+   -p => to map port, so all 8080 requests on machine will be trasfered to docker container.
+   -e => to set environment variable
+   -v => to map storage volume 
+5. Create / download json key file. - Go to gcp >> IAM >> Service Account >> Keys >> Add New - AS JSON. It will download to machine.
+6. Mount the key file (volume) whuile runnin docker run -v <Disk file path>:<docker file path>
+7. set GOOGLE_APPLICATION_CREDENTIALS to file path.
 
 # References
-Details regarding Exploratory Data Analysis can be found here: https://www.kaggle.com/code/shmagibokuchava7/pricepredict-pro
+1. Details regarding Exploratory Data Analysis can be found here: https://www.kaggle.com/code/shmagibokuchava7/pricepredict-pro
+2. Setting up Application Default Credentials: https://cloud.google.com/docs/authentication/provide-credentials-adc#how-to
+3. Connecting VS Code to GCP: https://www.youtube.com/watch?v=KeZ2ncbVPyE
 
 # Dataset
 https://www.kaggle.com/datasets/msnbehdani/mock-dataset-of-second-hand-car-sales
+
+
+
+
+
+
+
 
 
 
